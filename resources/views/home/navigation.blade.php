@@ -3,7 +3,7 @@
         <!-- Left Logo & Title -->
         <a class="navbar-brand d-flex align-items-center" href="{{ route('home') }}">
             <img src="{{ asset('user_view/images/pac_logo.png') }}" alt="Logo 1" class="logo-img">
-            <span class="ml-2 fw-bold">HSTU_RDPC</span>
+            <span class="ml-2 fw-bold">Jonogoner Dorbar</span>
         </a>
         <button class="navbar-toggler border-0" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -14,18 +14,18 @@
                     <a href="{{ route('home') }}" class="nav-link">Home</a>
                 </li>
                 <li class="nav-item {{ request()->is('schedule') ? 'active' : '' }}">
-                    <a href="{{url('schedule')}}" class="nav-link">Schedule</a>
+                    <a href="{{url('schedule')}}" class="nav-link">অভিযোগ</a>
                 </li>
                 <li class="nav-item {{ request()->routeIs('main_registration') ? 'active' : '' }}">
-                    <a href="{{ route('main_registration') }}" class="nav-link">Registration</a>
+                    <a href="{{ route('main_registration') }}" class="nav-link">অভিযোগ ট্র্যাকিং</a>
                 </li>
                 <li class="nav-item {{ request()->routeIs('payment_create') ? 'active' : '' }}">
-                    <a href="{{ route('payment_create') }}" class="nav-link">Payment</a>
+                    <a href="{{ route('payment_create') }}" class="nav-link">জরুরি সেবা</a>
                 </li>
                 <li class="nav-item {{ request()->routeIs('registration_list') ? 'active' : '' }}">
-                    <a href="{{ route('registration_list') }}" class="nav-link">Registered Teams</a>
+                    <a href="{{ route('registration_list') }}" class="nav-link">লাইভ চ্যাট</a>
                 </li>
-                <li class="nav-item {{ request()->routeIs('approve_list') ? 'active' : '' }}">
+                <!-- <li class="nav-item {{ request()->routeIs('approve_list') ? 'active' : '' }}">
                     <a href="{{ route('approve_list') }}" class="nav-link">Approved Teams</a>
                 </li>
                 <li class="nav-item {{ request()->is('gellary') ? 'active' : '' }}">
@@ -33,7 +33,7 @@
                 </li>
                 <li class="nav-item {{ request()->is('contact') ? 'active' : '' }}">
                     <a href="{{url('contact')}}" class="nav-link">Contact</a>
-                </li>
+                </li> -->
                 <!-- <li class="nav-item {{ request()->routeIs('project_showcase') ? 'active' : '' }}">
                     <a href="{{url('project-showcase')}}" class="nav-link">project_showcase</a>
 

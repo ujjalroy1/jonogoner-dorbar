@@ -1,6 +1,6 @@
 <!-- Running Header (Marquee) -->
 <marquee behavior="scroll" direction="left" class="running-header" style="font-size: 20px; font-weight: bold; background: linear-gradient(90deg, #6a11cb, #2575fc); color: #fff; padding: 10px;">
-  HSTU CSE Fest: A Celebration of Coding, Innovation, and Gaming!
+  জনগণের দরবার: দিনাজপুর জেলা প্রশাসকের কার্যালয়ে আপনাকে স্বাগতম। আপনার অভিযোগ ও মতামত জানানোর জন্য প্ল্যাটফর্মটি ব্যবহার করুন।
 </marquee>
 
 <!-- <section class="home-slider js-fullheight owl-carousel bg-white">
