@@ -2,7 +2,7 @@
     <div class="container d-flex align-items-center justify-content-between">
         <!-- Left Logo & Title -->
         <a class="navbar-brand d-flex align-items-center" href="{{ route('home') }}">
-            <img src="{{ asset('user_view/images/pac_logo.png') }}" alt="Logo 1" class="logo-img">
+            <img src="{{ asset('user_view/images/bdgovt.png') }}" alt="Logo 1" class="logo-img">
             <span class="ml-2 fw-bold">Jonogoner Dorbar</span>
         </a>
         <button class="navbar-toggler border-0" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
@@ -40,12 +40,36 @@
                 <li class="nav-item {{ request()->is('contact') ? 'active' : '' }}">
                     <a href="{{route('showForm') }}" class="nav-link">Message</a>
                 </li> -->
+
+                @auth
+                <!-- User is logged in -->
+                <li class="nav-item">
+                    <a href="{{ route('logout') }}"
+                        onclick="event.preventDefault(); document.getElementById('logout-form').submit();"
+                        class="nav-link">
+                        Logout
+                    </a>
+                </li>
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                    @csrf
+                </form>
+                @else
+                <!-- User is not logged in -->
+                <li class="nav-item {{ request()->routeIs('login') ? 'active' : '' }}">
+                    <a href="{{ route('login') }}" class="nav-link">Login</a>
+                </li>
+                <li class="nav-item {{ request()->routeIs('register') ? 'active' : '' }}">
+                    <a href="{{ route('register') }}" class="nav-link">Register</a>
+                </li>
+                @endauth
+
+
             </ul>
         </div>
 
 
         <a class="navbar-brand d-none d-lg-block" href="{{ route('home') }}">
-            <img src="{{ asset('user_view/images/hstu logo.jpg') }}" alt="Logo 2" class="logo-img">
+            <img src="{{ asset('user_view/images/bdgovt.png') }}" alt="Logo 2" class="logo-img">
         </a>
     </div>
 </nav>
