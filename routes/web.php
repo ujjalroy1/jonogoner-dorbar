@@ -51,7 +51,7 @@ Route::get('/teams_payments', [PaymentController::class, 'viewPayments'])->middl
 Route::post('/teams_payments/approve/{id}', [PaymentController::class, 'approvePayment'])->middleware(['auth', 'admin'])->name('approvePayment');
 Route::delete('/teams_payments/delete/{id}', [PaymentController::class, 'deletePayment'])->middleware(['auth', 'admin'])->name('deletePayment');
 
-Route::get('schedule', [HomeController::class, 'schedule'])->name('schedule');
+Route::get('/complaint', [HomeController::class, 'complaint'])->name('complaint');
 Route::get('gellary', [HomeController::class, 'gellary'])->name('gellary');
 Route::get('contact', [HomeController::class, 'contact'])->name('contact');
 
@@ -60,3 +60,11 @@ Route::get('admin/dashboard', [HomeController::class, 'index'])->middleware(['au
 
 Route::get('/message-form', [MessageController::class, 'showForm'])->middleware(['auth', 'admin'])->name('showForm');
 Route::post('/send-message', [MessageController::class, 'sendMessage'])->middleware(['auth', 'admin'])->name('sendMessage');
+
+////
+use App\Http\Controllers\OvijogController;
+
+
+Route::get('/ovijogs', [OvijogController::class, 'index'])->name('ovijogs.index');
+Route::post('/ovijogs', [OvijogController::class, 'store'])->name('ovijogs.store');
+Route::delete('/ovijogs/{id}', [OvijogController::class, 'destroy'])->name('ovijogs.destroy');

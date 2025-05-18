@@ -192,9 +192,9 @@ class HomeController extends Controller
 
         return redirect()->back()->with('success', 'Payment information submitted successfully!');
     }
-    public function schedule()
+    public function complaint()
     {
-        return view('home.schedule');
+        return view('home.complaints');
     }
     public function gellary()
     {

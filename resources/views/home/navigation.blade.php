@@ -13,8 +13,8 @@
                 <li class="nav-item {{ request()->routeIs('home') ? 'active' : '' }}">
                     <a href="{{ route('home') }}" class="nav-link">Home</a>
                 </li>
-                <li class="nav-item {{ request()->is('schedule') ? 'active' : '' }}">
-                    <a href="{{url('schedule')}}" class="nav-link">অভিযোগ</a>
+                <li class="nav-item {{ request()->is('ovijogs') ? 'active' : '' }}">
+                    <a href="{{url('ovijogs')}}" class="nav-link">অভিযোগ</a>
                 </li>
                 <li class="nav-item {{ request()->routeIs('main_registration') ? 'active' : '' }}">
                     <a href="{{ route('main_registration') }}" class="nav-link">অভিযোগ ট্র্যাকিং</a>
