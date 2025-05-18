@@ -3,35 +3,6 @@
   জনগণের দরবার: দিনাজপুর জেলা প্রশাসকের কার্যালয়ে আপনাকে স্বাগতম। আপনার অভিযোগ ও মতামত জানানোর জন্য প্ল্যাটফর্মটি ব্যবহার করুন।
 </marquee>
 
-<!-- <section class="home-slider js-fullheight owl-carousel bg-white">
-  <div class="slider-item js-fullheight">
-    <div class="overlay"></div>
-    <div class="container">
-      <div class="row d-md-flex no-gutters slider-text js-fullheight align-items-center justify-content-end" data-scrollax-parent="true">
-        <div class="one-third order-md-last img js-fullheight" 
-             style="background-image: url('{{ asset('user_view/images/hstu logo.jpg') }}'); 
-                    background-size: contain; 
-                    background-position: center; 
-                    background-repeat: no-repeat;">
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="slider-item js-fullheight">
-    <div class="overlay"></div>
-    <div class="container">
-      <div class="row d-flex no-gutters slider-text js-fullheight align-items-center justify-content-end" data-scrollax-parent="true">
-        <div class="one-third order-md-last img js-fullheight" 
-             style="background-image: url('{{ asset('user_view/images/hstu gate.jpg') }}'); 
-                    background-size: cover; 
-                    background-position: center;">
-        </div>
-      </div>
-    </div>
-  </div>
-</section> -->
-
 <!-- Responsive Design Adjustments -->
 <style>
   .running-header {
