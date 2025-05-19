@@ -21,7 +21,7 @@
                 <li><a href="forms.html"> <i class="icon-padnote"></i>Forms </a></li> -->
                 <li><a href="#exampledropdownDropdown" aria-expanded="false" data-toggle="collapse"> <i class="icon-windows"></i>Department</a>
                   <ul id="exampledropdownDropdown" class="collapse list-unstyled ">
-                    <li><a href="{{ url('admin/teams') }}">ভূমি-সেবা</a></li>
+                    <li><a href="{{ url('admin/vumiseba') }}">ভূমি-সেবা</a></li>
                     <li><a href="#">স্বাস্থ্য-সেবা</a></li>
                     <li><a href="#">শিক্ষা-সেবা</a></li>
                     <li><a href="#">নিরাপত্তা ও শৃঙ্খলা</a></li>
