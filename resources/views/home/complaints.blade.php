@@ -94,26 +94,30 @@
             <div class="mb-3">
               <label for="type" class="form-label">ধরন</label>
               <select name="type" id="type" class="form-select" required>
-                <option value="A">A</option>
-                <option value="B">B</option>
-                <option value="C">C</option>
+                <option value="A">ভোক্তা অধিকার</option>
+                <option value="B">সড়ক ও যানবাহন</option>
+                <option value="C">বিদ্যুৎ</option>
+                <option value="D">শিক্ষা</option>
+                <option value="E">নিরাপত্তা</option>
+                <option value="F">চিকিৎসা</option>
+                <option value="G">অন্যান্য</option>
               </select>
             </div>
 
             <div class="mb-3">
-              <label for="description" class="form-label">Description</label>
+              <label for="description" class="form-label">বর্ণনা</label>
               <textarea name="description" id="description" class="form-control" required></textarea>
             </div>
 
             <div class="mb-4">
-              <label class="block font-medium">Attachments (multiple allowed)</label>
+              <label class="block font-medium">সংযুক্তি (যদি থাকে)</label>
               <input type="file" name="attachment[]" class="form-control" multiple>
             </div>
 
 
             <div class="form-check mb-3">
               <input type="checkbox" name="hide" value="1" class="form-check-input" id="hideCheckbox">
-              <label for="hideCheckbox" class="form-check-label">Hide Complaint</label>
+              <label for="hideCheckbox" class="form-check-label">পরিচয় গোপন রাখতে টিক দিন</label>
             </div>
 
             <input type="hidden" name="status" value="0">
@@ -121,8 +125,8 @@
             <input type="hidden" name="comment">
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-            <button type="submit" class="btn btn-primary">Register</button>
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">বাতিল</button>
+            <button type="submit" class="btn btn-primary">জমা দিন</button>
           </div>
         </form>
       </div>
