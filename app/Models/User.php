@@ -50,4 +50,8 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+    public function ovijogs()
+    {
+        return $this->hasMany(ovijog::class);
+    }
 }

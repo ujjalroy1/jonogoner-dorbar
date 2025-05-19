@@ -68,3 +68,7 @@ use App\Http\Controllers\OvijogController;
 Route::get('/ovijogs', [OvijogController::class, 'index'])->name('ovijogs.index');
 Route::post('/ovijogs', [OvijogController::class, 'store'])->name('ovijogs.store');
 Route::delete('/ovijogs/{id}', [OvijogController::class, 'destroy'])->name('ovijogs.destroy');
+
+
+//admin department
+Route::get('admin/teams', [AdminController::class, 'vumiseba'])->middleware(['auth', 'admin'])->name('vumiseba');
