@@ -63,13 +63,18 @@ Route::post('/send-message', [MessageController::class, 'sendMessage'])->middlew
 
 ////
 use App\Http\Controllers\OvijogController;
+<<<<<<< HEAD
 use App\Http\Controllers\ChatController;
 
+=======
+use App\Http\Controllers\UserController;
+>>>>>>> f8701caebcc9defeb790306ea294c433d22e967b
 
 Route::get('/ovijogs', [OvijogController::class, 'index'])->name('ovijogs.index');
 Route::post('/ovijogs', [OvijogController::class, 'store'])->name('ovijogs.store');
 Route::delete('/ovijogs/{id}', [OvijogController::class, 'destroy'])->name('ovijogs.destroy');
 
+<<<<<<< HEAD
 Route::middleware(['auth'])->group(function () {
     // User routes
     Route::get('/chat', [ChatController::class, 'index'])->name('chat.index');
@@ -84,3 +89,15 @@ Route::middleware(['auth'])->group(function () {
         Route::post('/admin/chat/next', [ChatController::class, 'nextUser'])->name('admin.chat.next');
     });
 });
+=======
+
+//admin department
+Route::get('admin/vumiseba', [AdminController::class, 'vumiseba'])->middleware(['auth', 'admin'])->name('vumiseba');
+Route::post('admin/status-change/{id}', [AdminController::class, 'status_change'])->middleware(['auth', 'admin'])->name('status_change');
+Route::get('admin/vumiseba-delete/{id}', [AdminController::class, 'vumiseba_delete'])->middleware(['auth', 'admin'])->name('vumiseba_delete');
+Route::post('admin/type-change/{id}', [AdminController::class, 'type_change'])->middleware(['auth', 'admin'])->name('type_change');
+
+
+//after login
+Route::get('/user', [UserController::class, 'index'])->middleware(['auth'])->name('userindex');
+>>>>>>> f8701caebcc9defeb790306ea294c433d22e967b

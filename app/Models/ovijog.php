@@ -18,4 +18,8 @@ class ovijog extends Model
         'feedback',
         'comment',
     ];
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }
