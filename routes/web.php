@@ -71,8 +71,16 @@ Route::post('/ovijogs', [OvijogController::class, 'store'])->name('ovijogs.store
 Route::delete('/ovijogs/{id}', [OvijogController::class, 'destroy'])->name('ovijogs.destroy');
 
 Route::middleware(['auth'])->group(function () {
+    // User routes
     Route::get('/chat', [ChatController::class, 'index'])->name('chat.index');
-    Route::post('/chat/send', [ChatController::class, 'send'])->name('chat.send');
-    Route::get('/chat/queue-status', [ChatController::class, 'queueStatus'])->name('chat.queueStatus');
-    Route::post('/chat/start', [ChatController::class, 'createSession'])->name('chat.start');
+    Route::post('/chat/join', [ChatController::class, 'joinQueue'])->name('chat.join');
+    Route::post('/chat/send', [ChatController::class, 'sendMessage'])->name('chat.send');
+    Route::post('/chat/leave', [ChatController::class, 'leaveChat'])->name('chat.leave');
+
+    // Admin routes
+    Route::middleware(['auth', 'admin'])->group(function () {
+        Route::get('/admin/chat', [ChatController::class, 'adminIndex'])->name('admin.chat.index');
+        Route::post('/admin/chat/end', [ChatController::class, 'endChat'])->name('admin.chat.end');
+        Route::post('/admin/chat/next', [ChatController::class, 'nextUser'])->name('admin.chat.next');
+    });
 });
