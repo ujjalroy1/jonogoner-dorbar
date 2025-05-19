@@ -63,8 +63,16 @@ Route::post('/send-message', [MessageController::class, 'sendMessage'])->middlew
 
 ////
 use App\Http\Controllers\OvijogController;
+use App\Http\Controllers\ChatController;
 
 
 Route::get('/ovijogs', [OvijogController::class, 'index'])->name('ovijogs.index');
 Route::post('/ovijogs', [OvijogController::class, 'store'])->name('ovijogs.store');
 Route::delete('/ovijogs/{id}', [OvijogController::class, 'destroy'])->name('ovijogs.destroy');
+
+Route::middleware(['auth'])->group(function () {
+    Route::get('/chat', [ChatController::class, 'index'])->name('chat.index');
+    Route::post('/chat/send', [ChatController::class, 'send'])->name('chat.send');
+    Route::get('/chat/queue-status', [ChatController::class, 'queueStatus'])->name('chat.queueStatus');
+    Route::post('/chat/start', [ChatController::class, 'createSession'])->name('chat.start');
+});
