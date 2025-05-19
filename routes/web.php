@@ -63,7 +63,7 @@ Route::post('/send-message', [MessageController::class, 'sendMessage'])->middlew
 
 ////
 use App\Http\Controllers\OvijogController;
-
+use App\Http\Controllers\UserController;
 
 Route::get('/ovijogs', [OvijogController::class, 'index'])->name('ovijogs.index');
 Route::post('/ovijogs', [OvijogController::class, 'store'])->name('ovijogs.store');
@@ -75,3 +75,7 @@ Route::get('admin/vumiseba', [AdminController::class, 'vumiseba'])->middleware([
 Route::post('admin/status-change/{id}', [AdminController::class, 'status_change'])->middleware(['auth', 'admin'])->name('status_change');
 Route::get('admin/vumiseba-delete/{id}', [AdminController::class, 'vumiseba_delete'])->middleware(['auth', 'admin'])->name('vumiseba_delete');
 Route::post('admin/type-change/{id}', [AdminController::class, 'type_change'])->middleware(['auth', 'admin'])->name('type_change');
+
+
+//after login
+Route::get('/user', [UserController::class, 'index'])->middleware(['auth'])->name('userindex');
