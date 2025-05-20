@@ -11,7 +11,7 @@ class OvijogController extends Controller
     // Display all complaints
     public function index()
     {
-        $ovijogs = Ovijog::where('user_id', 1)->get();
+        $ovijogs = Ovijog::where('user_id', Auth::user()->id)->get();
         // dd($ovijogs);
         return view('home.complaints', compact('ovijogs'));
     }
@@ -20,7 +20,7 @@ class OvijogController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'type' => 'required|string|in:A,B,C',
+            'type' => 'required|string',
             'description' => 'required|string',
             'attachment.*' => 'required|file|mimes:jpg,jpeg,png,pdf|max:2048',
         ]);
@@ -38,7 +38,7 @@ class OvijogController extends Controller
         }
 
         Ovijog::create([
-            'user_id' => 1,
+            'user_id' => Auth::user()->id,
             'type' => $request->type,
             'description' => $request->description,
             'attachment' => json_encode($storedFiles),
@@ -56,7 +56,7 @@ class OvijogController extends Controller
     // Delete a complaint
     public function destroy($id)
     {
-        $ovijog = Ovijog::where('id', $id)->where('user_id', 1)->firstOrFail();
+        $ovijog = Ovijog::where('id', $id)->where('user_id', Auth::user()->id)->firstOrFail();
         $ovijog->delete();
 
         return redirect()->route('ovijogs.index')->with('success', 'Complaint deleted.');

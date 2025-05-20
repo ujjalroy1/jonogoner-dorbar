@@ -63,33 +63,28 @@ Route::post('/send-message', [MessageController::class, 'sendMessage'])->middlew
 
 ////
 use App\Http\Controllers\OvijogController;
-<<<<<<< HEAD
 use App\Http\Controllers\ChatController;
 
-=======
 use App\Http\Controllers\UserController;
->>>>>>> f8701caebcc9defeb790306ea294c433d22e967b
 
-Route::get('/ovijogs', [OvijogController::class, 'index'])->name('ovijogs.index');
-Route::post('/ovijogs', [OvijogController::class, 'store'])->name('ovijogs.store');
-Route::delete('/ovijogs/{id}', [OvijogController::class, 'destroy'])->name('ovijogs.destroy');
+Route::get('/ovijogs', [OvijogController::class, 'index'])->middleware(['auth'])->name('ovijogs.index');
+Route::post('/ovijogs', [OvijogController::class, 'store'])->middleware(['auth'])->name('ovijogs.store');
+Route::delete('/ovijogs/{id}', [OvijogController::class, 'destroy'])->middleware(['auth'])->name('ovijogs.destroy');
 
-<<<<<<< HEAD
+// User routes
 Route::middleware(['auth'])->group(function () {
-    // User routes
     Route::get('/chat', [ChatController::class, 'index'])->name('chat.index');
     Route::post('/chat/join', [ChatController::class, 'joinQueue'])->name('chat.join');
     Route::post('/chat/send', [ChatController::class, 'sendMessage'])->name('chat.send');
     Route::post('/chat/leave', [ChatController::class, 'leaveChat'])->name('chat.leave');
-
-    // Admin routes
-    Route::middleware(['auth', 'admin'])->group(function () {
-        Route::get('/admin/chat', [ChatController::class, 'adminIndex'])->name('admin.chat.index');
-        Route::post('/admin/chat/end', [ChatController::class, 'endChat'])->name('admin.chat.end');
-        Route::post('/admin/chat/next', [ChatController::class, 'nextUser'])->name('admin.chat.next');
-    });
 });
-=======
+
+// Admin routes
+Route::middleware(['auth', 'admin'])->group(function () {
+    Route::get('/admin/chat', [ChatController::class, 'adminIndex'])->name('admin.chat.index');
+    Route::post('/admin/chat/end', [ChatController::class, 'endChat'])->name('admin.chat.end');
+    Route::post('/admin/chat/next', [ChatController::class, 'nextUser'])->name('admin.chat.next');
+});
 
 //admin department
 Route::get('admin/vumiseba', [AdminController::class, 'vumiseba'])->middleware(['auth', 'admin'])->name('vumiseba');
@@ -100,4 +95,3 @@ Route::post('admin/type-change/{id}', [AdminController::class, 'type_change'])->
 
 //after login
 Route::get('/user', [UserController::class, 'index'])->middleware(['auth'])->name('userindex');
->>>>>>> f8701caebcc9defeb790306ea294c433d22e967b

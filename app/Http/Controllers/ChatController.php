@@ -6,6 +6,7 @@ use App\Models\Chat;
 use App\Models\ChatQueue;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 use Pusher\Pusher;
 
 class ChatController extends Controller
@@ -19,65 +20,96 @@ class ChatController extends Controller
 
     public function joinQueue(Request $request)
     {
-        $existingQueue = ChatQueue::where('user_id', Auth::id())->first();
-        if ($existingQueue) {
-            return response()->json(['status' => $existingQueue->status]);
+        try {
+            $existingQueue = ChatQueue::where('user_id', Auth::id())->first();
+            if ($existingQueue) {
+                return response()->json(['status' => $existingQueue->status]);
+            }
+
+            $activeChat = ChatQueue::where('status', 'active')->first();
+            $status = $activeChat ? 'waiting' : 'active';
+
+            $queue = ChatQueue::create([
+                'user_id' => Auth::id(),
+                'status' => $status,
+            ]);
+
+            Log::info('User joined queue', ['user_id' => Auth::id(), 'status' => $status]);
+
+            if ($status === 'active') {
+                $this->notifyAdmin();
+            }
+
+            return response()->json(['status' => $status]);
+        } catch (\Exception $e) {
+            Log::error('Join Queue Error', ['error' => $e->getMessage()]);
+            return response()->json(['error' => 'Failed to join queue'], 500);
         }
-
-        $activeChat = ChatQueue::where('status', 'active')->first();
-        $status = $activeChat ? 'waiting' : 'active';
-
-        $queue = ChatQueue::create([
-            'user_id' => Auth::id(),
-            'status' => $status,
-        ]);
-
-        if ($status === 'active') {
-            $this->notifyAdmin();
-        }
-
-        return response()->json(['status' => $status]);
     }
 
     public function sendMessage(Request $request)
     {
-        $request->validate(['message' => 'required|string']);
-        $queue = ChatQueue::where('user_id', Auth::id())->first();
+        try {
+            $request->validate(['message' => 'required|string|max:1000']);
+            $queue = ChatQueue::where('user_id', Auth::id())->first();
 
-        if (!$queue || $queue->status !== 'active') {
-            return response()->json(['error' => 'Not in aktif chat'], 403);
+            if (!$queue) {
+                return response()->json(['error' => 'You are not in the queue'], 403);
+            }
+
+            if ($queue->status !== 'active') {
+                return response()->json(['error' => 'Chat is not active', 'queue_status' => $queue->status], 403);
+            }
+
+            $chat = Chat::create([
+                'user_id' => Auth::id(),
+                'message' => $request->message,
+                'sender_role' => Auth::user()->role,
+            ]);
+
+            Log::info('Message sent', ['user_id' => Auth::id(), 'message' => $chat->message]);
+
+            $pusher = new Pusher(
+                env('PUSHER_APP_KEY'),
+                env('PUSHER_APP_SECRET'),
+                env('PUSHER_APP_ID'),
+                [
+                    'cluster' => env('PUSHER_APP_CLUSTER'),
+                    'useTLS' => true,
+                    'curl_options' => [
+                        CURLOPT_SSL_VERIFYPEER => false,
+                        CURLOPT_SSL_VERIFYHOST => false,
+                    ]
+                ]
+            );
+
+            $pusher->trigger('chat-channel', 'message-sent', [
+                'user_id' => Auth::id(),
+                'message' => $chat->message,
+                'sender_role' => $chat->sender_role,
+                'created_at' => $chat->created_at->toDateTimeString(),
+            ]);
+
+            return response()->json(['success' => true, 'message' => $chat->message]);
+        } catch (\Exception $e) {
+            Log::error('Send Message Error', ['error' => $e->getMessage()]);
+            return response()->json(['error' => 'Failed to send message: ' . $e->getMessage()], 500);
         }
-
-        $chat = Chat::create([
-            'user_id' => Auth::id(),
-            'message' => $request->message,
-            'sender_role' => Auth::user()->role,
-        ]);
-
-        $pusher = new Pusher(
-            env('PUSHER_APP_KEY'),
-            env('PUSHER_APP_SECRET'),
-            env('PUSHER_APP_ID'),
-            ['cluster' => env('PUSHER_APP_CLUSTER'), 'useTLS' => true]
-        );
-
-        $pusher->trigger('chat-channel', 'message-sent', [
-            'user_id' => Auth::id(),
-            'message' => $chat->message,
-            'sender_role' => $chat->sender_role,
-            'created_at' => $chat->created_at->toDateTimeString(),
-        ]);
-
-        return response()->json(['success' => true]);
     }
 
     public function leaveChat()
     {
-        $queue = ChatQueue::where('user_id', Auth::id())->first();
-        if ($queue) {
-            $queue->delete();
+        try {
+            $queue = ChatQueue::where('user_id', Auth::id())->first();
+            if ($queue) {
+                $queue->delete();
+                Log::info('User left chat', ['user_id' => Auth::id()]);
+            }
+            return response()->json(['success' => true]);
+        } catch (\Exception $e) {
+            Log::error('Leave Chat Error', ['error' => $e->getMessage()]);
+            return response()->json(['error' => 'Failed to leave chat'], 500);
         }
-        return response()->json(['success' => true]);
     }
 
     public function adminIndex()
@@ -90,48 +122,84 @@ class ChatController extends Controller
 
     public function endChat()
     {
-        $activeQueue = ChatQueue::where('status', 'active')->first();
-        if ($activeQueue) {
-            $activeQueue->update(['status' => 'completed']);
-            $activeQueue->delete();
-            $this->startNextChat();
+        try {
+            $activeQueue = ChatQueue::where('status', 'active')->first();
+            if ($activeQueue) {
+                $activeQueue->update(['status' => 'completed']);
+                $activeQueue->delete();
+                Log::info('Chat ended', ['user_id' => $activeQueue->user_id]);
+                $this->startNextChat();
+            }
+            return response()->json(['success' => true]);
+        } catch (\Exception $e) {
+            Log::error('End Chat Error', ['error' => $e->getMessage()]);
+            return response()->json(['error' => 'Failed to end chat'], 500);
         }
-        return response()->json(['success' => true]);
     }
 
     public function nextUser()
     {
-        $this->startNextChat();
-        return response()->json(['success' => true]);
+        try {
+            $this->startNextChat();
+            return response()->json(['success' => true]);
+        } catch (\Exception $e) {
+            Log::error('Next User Error', ['error' => $e->getMessage()]);
+            return response()->json(['error' => 'Failed to start next chat'], 500);
+        }
     }
 
     private function startNextChat()
     {
-        $nextQueue = ChatQueue::where('status', 'waiting')->orderBy('created_at')->first();
-        if ($nextQueue) {
-            $nextQueue->update(['status' => 'active']);
-            $this->notifyAdmin();
-            $pusher = new Pusher(
-                env('PUSHER_APP_KEY'),
-                env('PUSHER_APP_SECRET'),
-                env('PUSHER_APP_ID'),
-                ['cluster' => env('PUSHER_APP_CLUSTER'), 'useTLS' => true]
-            );
-            $pusher->trigger('chat-channel', 'queue-updated', [
-                'user_id' => $nextQueue->user_id,
-                'status' => 'active',
-            ]);
+        try {
+            $nextQueue = ChatQueue::where('status', 'waiting')->orderBy('created_at')->first();
+            if ($nextQueue) {
+                $nextQueue->update(['status' => 'active']);
+                Log::info('Next chat started', ['user_id' => $nextQueue->user_id]);
+                $this->notifyAdmin();
+
+                $pusher = new Pusher(
+                    env('PUSHER_APP_KEY'),
+                    env('PUSHER_APP_SECRET'),
+                    env('PUSHER_APP_ID'),
+                    [
+                        'cluster' => env('PUSHER_APP_CLUSTER'),
+                        'useTLS' => true,
+                        'curl_options' => [
+                            CURLOPT_SSL_VERIFYPEER => false,
+                            CURLOPT_SSL_VERIFYHOST => false,
+                        ]
+                    ]
+                );
+
+                $pusher->trigger('chat-channel', 'queue-updated', [
+                    'user_id' => $nextQueue->user_id,
+                    'status' => 'active',
+                ]);
+            }
+        } catch (\Exception $e) {
+            Log::error('Start Next Chat Error', ['error' => $e->getMessage()]);
         }
     }
 
     private function notifyAdmin()
     {
-        $pusher = new Pusher(
-            env('PUSHER_APP_KEY'),
-            env('PUSHER_APP_SECRET'),
-            env('PUSHER_APP_ID'),
-            ['cluster' => env('PUSHER_APP_CLUSTER'), 'useTLS' => true]
-        );
-        $pusher->trigger('chat-channel', 'queue-updated', ['admin' => true]);
+        try {
+            $pusher = new Pusher(
+                env('PUSHER_APP_KEY'),
+                env('PUSHER_APP_SECRET'),
+                env('PUSHER_APP_ID'),
+                [
+                    'cluster' => env('PUSHER_APP_CLUSTER'),
+                    'useTLS' => true,
+                    'curl_options' => [
+                        CURLOPT_SSL_VERIFYPEER => false,
+                        CURLOPT_SSL_VERIFYHOST => false,
+                    ]
+                ]
+            );
+            $pusher->trigger('chat-channel', 'queue-updated', ['admin' => true]);
+        } catch (\Exception $e) {
+            Log::error('Notify Admin Error', ['error' => $e->getMessage()]);
+        }
     }
 }
