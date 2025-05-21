@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Middleware\Role;
 use App\Models\Chat;
 use App\Models\ChatQueue;
 use Illuminate\Http\Request;
@@ -50,21 +51,26 @@ class ChatController extends Controller
     public function sendMessage(Request $request)
     {
         try {
+            $role = Auth::user()->usertype;
             $request->validate(['message' => 'required|string|max:1000']);
             $queue = ChatQueue::where('user_id', Auth::id())->first();
 
-            if (!$queue) {
-                return response()->json(['error' => 'You are not in the queue'], 403);
-            }
-
-            if ($queue->status !== 'active') {
-                return response()->json(['error' => 'Chat is not active', 'queue_status' => $queue->status], 403);
+            $isAdmin = $role === 'admin';
+            if (!$isAdmin) {
+                // Regular user check: must be in queue and active
+                $queue = ChatQueue::where('user_id', Auth::id())->first();
+                if (!$queue) {
+                    return response()->json(['error' => 'You are not in the queue'], 403);
+                }
+                if ($queue->status !== 'active') {
+                    return response()->json(['error' => 'Chat is not active', 'queue_status' => $queue->status], 403);
+                }
             }
 
             $chat = Chat::create([
                 'user_id' => Auth::id(),
                 'message' => $request->message,
-                'sender_role' => Auth::user()->role,
+                'sender_role' => $role,
             ]);
 
             Log::info('Message sent', ['user_id' => Auth::id(), 'message' => $chat->message]);
@@ -73,14 +79,7 @@ class ChatController extends Controller
                 env('PUSHER_APP_KEY'),
                 env('PUSHER_APP_SECRET'),
                 env('PUSHER_APP_ID'),
-                [
-                    'cluster' => env('PUSHER_APP_CLUSTER'),
-                    'useTLS' => true,
-                    'curl_options' => [
-                        CURLOPT_SSL_VERIFYPEER => false,
-                        CURLOPT_SSL_VERIFYHOST => false,
-                    ]
-                ]
+                ['cluster' => env('PUSHER_APP_CLUSTER'), 'useTLS' => true]
             );
 
             $pusher->trigger('chat-channel', 'message-sent', [
@@ -161,14 +160,7 @@ class ChatController extends Controller
                     env('PUSHER_APP_KEY'),
                     env('PUSHER_APP_SECRET'),
                     env('PUSHER_APP_ID'),
-                    [
-                        'cluster' => env('PUSHER_APP_CLUSTER'),
-                        'useTLS' => true,
-                        'curl_options' => [
-                            CURLOPT_SSL_VERIFYPEER => false,
-                            CURLOPT_SSL_VERIFYHOST => false,
-                        ]
-                    ]
+                    ['cluster' => env('PUSHER_APP_CLUSTER'), 'useTLS' => true]
                 );
 
                 $pusher->trigger('chat-channel', 'queue-updated', [
@@ -188,14 +180,7 @@ class ChatController extends Controller
                 env('PUSHER_APP_KEY'),
                 env('PUSHER_APP_SECRET'),
                 env('PUSHER_APP_ID'),
-                [
-                    'cluster' => env('PUSHER_APP_CLUSTER'),
-                    'useTLS' => true,
-                    'curl_options' => [
-                        CURLOPT_SSL_VERIFYPEER => false,
-                        CURLOPT_SSL_VERIFYHOST => false,
-                    ]
-                ]
+                ['cluster' => env('PUSHER_APP_CLUSTER'), 'useTLS' => true]
             );
             $pusher->trigger('chat-channel', 'queue-updated', ['admin' => true]);
         } catch (\Exception $e) {

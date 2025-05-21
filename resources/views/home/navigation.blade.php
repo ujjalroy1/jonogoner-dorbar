@@ -22,8 +22,8 @@
                 <li class="nav-item {{ request()->routeIs('payment_create') ? 'active' : '' }}">
                     <a href="{{ route('payment_create') }}" class="nav-link">জরুরি সেবা</a>
                 </li>
-                <li class="nav-item {{ request()->routeIs('registration_list') ? 'active' : '' }}">
-                    <a href="{{ route('registration_list') }}" class="nav-link">লাইভ চ্যাট</a>
+                <li class="nav-item {{ request()->routeIs('chat.index') ? 'active' : '' }}">
+                    <a href="{{ route('chat.index') }}" class="nav-link">লাইভ চ্যাট</a>
                 </li>
                 <!-- <li class="nav-item {{ request()->routeIs('approve_list') ? 'active' : '' }}">
                     <a href="{{ route('approve_list') }}" class="nav-link">Approved Teams</a>
