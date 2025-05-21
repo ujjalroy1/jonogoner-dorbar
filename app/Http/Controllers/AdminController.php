@@ -11,7 +11,7 @@ class AdminController extends Controller
 
     public function vumiseba()
     {
-        $ovijogs = $ovijogs = ovijog::with('user')->where('type', '1')->get();;
+        $ovijogs = ovijog::with('user')->where('type', '1')->get();
         return view('admin.vumiseba', compact('ovijogs'));
     }
     public function status_change(Request $request, $id)

@@ -61,4 +61,10 @@ class OvijogController extends Controller
 
         return redirect()->route('ovijogs.index')->with('success', 'Complaint deleted.');
     }
+    public function all_ovijogs()
+    {
+        $data=ovijog::with('user')->get();
+
+        return view('home.sobovijog',compact('data'));
+    }
 }

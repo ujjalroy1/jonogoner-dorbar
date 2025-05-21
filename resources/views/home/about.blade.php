@@ -146,7 +146,7 @@
             </div>
             <h6 class="text-secondary">মোট অভিযোগ</h6>
             <h2 class="text-dark fw-bold">1,245</h2>
-            <a href="#" class="stretched-link"></a>
+            <a href="{{ route('all_ovijogs') }}" class="stretched-link"></a>
         </div>
     </div>
 
