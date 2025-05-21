@@ -37,13 +37,20 @@
     </div>
 
     <script>
-        // Ensure user is authenticated
+        // Ensure user is authenticated and not an admin
         const userId = @json(Auth::id());
         const userRole = @json(Auth::user() ? Auth::user() -> role : null);
 
         if (!userId) {
             console.error('User not authenticated');
             alert('Please log in to use the chat');
+        }
+
+        if (userRole === 'admin') {
+            console.error('Admin user attempting to access user chat', {
+                role: userRole
+            });
+            alert('Admins cannot use the user chat. Please use the admin chat page.');
         }
 
         // Initialize Pusher
@@ -63,9 +70,10 @@
                 return;
             }
 
-            const isOwnMessage = data.user_id === userId && data.sender_role === userRole;
-            const alignmentClass = isOwnMessage ? 'text-right' : 'text-left';
-            const colorClass = isOwnMessage ? 'bg-blue-200' : 'bg-gray-200';
+            // Explicitly check sender_role for alignment
+            const isUserMessage = data.sender_role === 'user';
+            const alignmentClass = isUserMessage ? 'text-right' : 'text-left';
+            const colorClass = isUserMessage ? 'bg-blue-200' : 'bg-gray-200';
 
             const messageDiv = document.createElement('div');
             messageDiv.className = alignmentClass;
