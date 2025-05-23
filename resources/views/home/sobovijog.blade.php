@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="bn">
 
 <head>
     <meta charset="UTF-8">
@@ -8,10 +8,11 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css" rel="stylesheet">
     <link href="https://cdn.datatables.net/buttons/2.4.1/css/buttons.bootstrap5.min.css" rel="stylesheet">
+    @include('home.css')
 </head>
 
 <body>
-
+    @include('home.navigation')
     <div class="container mt-5">
         <h3 class="text-center mb-4">অভিযোগ তালিকা</h3>
         <div class="table-responsive">
@@ -94,17 +95,14 @@
         </div>
     </div>
 
-    <!-- Description/Attachment Modal -->
     <div class="modal fade" id="detailModal" tabindex="-1" aria-labelledby="detailModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-scrollable modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="detailModalLabel">বিস্তারিত</h5>
+                    <h5 class="modal-title">বিস্তারিত</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div class="modal-body" id="modalBodyContent">
-                    <!-- Dynamic content here -->
-                </div>
+                <div class="modal-body" id="modalBodyContent"></div>
             </div>
         </div>
     </div>
@@ -117,87 +115,28 @@
     <script src="https://cdn.datatables.net/buttons/2.4.1/js/buttons.bootstrap5.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/pdfmake.min.js"></script>
-    <!-- <script src="https://cdn.jsdelivr.net/gh/kidwai/pdfmake-bangla-fonts@latest/build/vfs_fonts.js"></script> -->
-    <script src="{{ asset('js/vfs_fonts.js') }}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.js"></script>
     <script src="https://cdn.datatables.net/buttons/2.4.1/js/buttons.html5.min.js"></script>
+
     <script>
+        pdfMake.fonts = {
+            kalpurush: {
+                normal: 'kalpurush.ttf',
+                bold: 'kalpurush.ttf',
+                italics: 'kalpurush.ttf',
+                bolditalics: 'kalpurush.ttf'
+            }
+        };
+
         $(document).ready(function() {
             const table = $('#complaintTable').DataTable({
                 responsive: true,
                 pageLength: 10,
                 lengthMenu: [5, 10, 25, 50, 100],
                 dom: 'Bfrtip',
-                buttons: [
-                    'excel',
-                    {
-                        extend: 'pdfHtml5',
-                        text: 'Export PDF',
-                        customize: function(doc) {
-                            console.log('Customizing PDF');
-                            // Set font
-                            doc.defaultStyle = {
-                                font: 'kalpurush'
-                            };
-                            // Fallback to Roboto if kalpurush fails
-                            if (!pdfMake.fonts['kalpurush']) {
-                                console.warn('kalpurush font not found, falling back to Roboto');
-                                doc.defaultStyle.font = 'Roboto';
-                            }
-                            // Adjust table to span 90% of page width and center it
-                            doc.content.forEach(function(item) {
-                                if (item.table) {
-                                    // Center the table (90% of 595pt = 535pt, margin = (595-535)/2 = 30pt)
-                                    item.margin = [30, 0, 30, 0];
-                                    // Set column widths to distribute evenly (8 columns)
-                                    item.table.widths = ['*', '*', '*', '*', '*', '*', '*', '*'];
-                                    // Optional: Center text in cells and add padding
-                                    item.table.body.forEach(function(row) {
-                                        row.forEach(function(cell) {
-                                            if (typeof cell === 'object') {
-                                                cell.alignment = 'center';
-                                                cell.margin = [5, 5, 5, 5]; // Add padding inside cells
-                                            }
-                                        });
-                                    });
-                                    // Add table border for clarity
-                                    item.table.layout = {
-                                        hLineWidth: function(i, node) {
-                                            return 1;
-                                        },
-                                        vLineWidth: function(i, node) {
-                                            return 1;
-                                        },
-                                        hLineColor: function(i, node) {
-                                            return 'black';
-                                        },
-                                        vLineColor: function(i, node) {
-                                            return 'black';
-                                        }
-                                    };
-                                }
-                            });
-                        }
-                    }
-                ]
+                buttons: ['excel', 'pdf']
             });
 
-            // Define fonts for pdfmake
-            pdfMake.fonts = {
-                kalpurush: {
-                    normal: 'kalpurush.ttf',
-                    bold: 'kalpurush.ttf',
-                    italics: 'kalpurush.ttf',
-                    bolditalics: 'kalpurush.ttf'
-                },
-                Roboto: {
-                    normal: 'Roboto-Regular.ttf',
-                    bold: 'Roboto-Medium.ttf',
-                    italics: 'Roboto-Italic.ttf',
-                    bolditalics: 'Roboto-MediumItalic.ttf'
-                }
-            };
-
-            // Handle modal view
             $('#complaintTable tbody').on('click', 'td', function() {
                 const columnIndex = $(this).index();
                 if (columnIndex === 2 || columnIndex === 3) {
@@ -208,6 +147,8 @@
             });
         });
     </script>
+    @include('home.footer')
+    @include('home.jss')
 </body>
 
 </html>
