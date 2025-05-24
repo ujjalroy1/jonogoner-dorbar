@@ -179,36 +179,71 @@
     </div>
 
     <!-- Slider Section -->
-    <section class="slider-section">
-        <div class="swiper-container">
-            <div class="swiper-wrapper">
-                <!-- Slide 1 -->
-                <div class="swiper-slide slide-1">
-                    <div class="slider-content">
-                        <h1 class="slider-title">Welcome to HSTU</h1>
-                        <p class="slider-text">Discover Excellence in Education and Innovation</p>
-                        <a href="#" class="btn btn-slider">Explore Campus</a>
-                    </div>
-                </div>
+<!-- Slider Section -->
+<section class="slider-section">
+    <div class="swiper-container">
+        <div class="swiper-wrapper">
 
-                <!-- Slide 2 -->
-                <div class="swiper-slide slide-2">
-                    <div class="slider-content">
-                        <h1 class="slider-title">Historic Campus Gate</h1>
-                        <p class="slider-text">Gateway to Knowledge and Opportunity</p>
-                        <a href="#" class="btn btn-slider">View History</a>
-                    </div>
+            <!-- Slide 1 -->
+            <div class="swiper-slide">
+                <img src="{{ asset('user_view/images/Upper_View_Of_HSTU.jpg') }}" class="img-fluid w-100 h-100 object-fit-cover rounded" alt="HSTU View">
+                <div class="slider-content">
+                    <h1 class="slider-title">Welcome to HSTU</h1>
+                    <!-- <p class="slider-text">Discover Excellence in Education and Innovation</p>
+                    <a href="#" class="btn btn-slider">Explore Campus</a> -->
                 </div>
             </div>
 
-            <!-- Navigation Arrows -->
-            <div class="swiper-button-next"></div>
-            <div class="swiper-button-prev"></div>
-            
-            <!-- Pagination -->
-            <div class="swiper-pagination"></div>
+            <!-- Slide 2 -->
+            <div class="swiper-slide">
+                <img src="{{ asset('user_view/images/West_side_of_Sura_Mosque.jpg') }}" class="img-fluid w-100 h-100 object-fit-cover rounded" alt="Sura Mosque">
+                <div class="slider-content">
+                    <h1 class="slider-title">Historic Campus Gate</h1>
+                    <!-- <p class="slider-text">Gateway to Knowledge and Opportunity</p>
+                    <a href="#" class="btn btn-slider">View History</a> -->
+                </div>
+            </div>
+
+            <!-- Slide 3 -->
+            <div class="swiper-slide">
+                <img src="{{ asset('user_view/images/Ramsagor_horse.jpg') }}" class="img-fluid w-100 h-100 object-fit-cover rounded" alt="Ramsagor">
+                <div class="slider-content">
+                    <h1 class="slider-title">Ramsagor Horse</h1>
+                    <!-- <a href="#" class="btn btn-slider">View History</a> -->
+                </div>
+            </div>
+
+            <!-- Slide 4 -->
+            <div class="swiper-slide">
+                <img src="{{ asset('user_view/images/Sitakot_Bihara_1.jpg') }}" class="img-fluid w-100 h-100 object-fit-cover rounded" alt="Sitakot Bihara">
+                <div class="slider-content">
+                    <h1 class="slider-title">Sitakot Bihara</h1>
+                    <!-- <p class="slider-text">Gateway to Knowledge and Opportunity</p>
+                    <a href="#" class="btn btn-slider">View History</a> -->
+                </div>
+            </div>
+
+            <!-- Slide 5 -->
+            <div class="swiper-slide">
+                <img src="{{ asset('user_view/images/Noyabaad_Mosque_(6).jpg') }}" class="img-fluid w-100 h-100 object-fit-cover rounded" alt="Noyabaad Mosque">
+                <div class="slider-content">
+                    <h1 class="slider-title">Noyabaad Mosque</h1>
+                    <!-- <p class="slider-text">Gateway to Knowledge and Opportunity</p>
+                    <a href="#" class="btn btn-slider">View History</a> -->
+                </div>
+            </div>
+
         </div>
-    </section>
+
+        <!-- Navigation Arrows -->
+        <div class="swiper-button-next"></div>
+        <div class="swiper-button-prev"></div>
+
+        <!-- Pagination -->
+        <div class="swiper-pagination"></div>
+    </div>
+</section>
+
 
     <!-- Required Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
