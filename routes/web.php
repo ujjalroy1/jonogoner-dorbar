@@ -64,13 +64,23 @@ Route::post('/send-message', [MessageController::class, 'sendMessage'])->middlew
 ////
 use App\Http\Controllers\OvijogController;
 use App\Http\Controllers\ChatController;
-
+use App\Http\Controllers\EmergencyController;
 use App\Http\Controllers\UserController;
 
 Route::get('/ovijogs', [OvijogController::class, 'index'])->middleware(['auth'])->name('ovijogs.index');
 Route::post('/ovijogs', [OvijogController::class, 'store'])->middleware(['auth'])->name('ovijogs.store');
 Route::delete('/ovijogs/{id}', [OvijogController::class, 'destroy'])->middleware(['auth'])->name('ovijogs.destroy');
 Route::get('/all-ovijogs', [OvijogController::class, 'all_ovijogs'])->name('all_ovijogs');
+
+Route::middleware(['auth'])->group(function () {
+    Route::get('/user/emergency', [EmergencyController::class, 'create'])->name('emergency.create');
+    Route::post('/user/emergency', [EmergencyController::class, 'store'])->name('emergency.store');
+});
+Route::middleware('auth', 'admin')->group(function () {
+    Route::get('/admin/emergencies', [EmergencyController::class, 'index'])->name('emergency.index');
+    Route::patch('/admin/emergencies/{emergency}/status', [EmergencyController::class, 'updateStatus'])->name('emergency.updateStatus');
+    Route::delete('/admin/emergencies/{emergency}', [EmergencyController::class, 'destroy'])->name('emergency.delete');
+});
 
 // User routes
 Route::middleware(['auth'])->group(function () {

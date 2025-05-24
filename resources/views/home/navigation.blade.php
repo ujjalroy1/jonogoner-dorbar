@@ -3,7 +3,7 @@
         <!-- Left Logo & Title -->
         <a class="navbar-brand d-flex align-items-center" href="{{ route('home') }}">
             <img src="{{ asset('user_view/images/bdgovt.png') }}" alt="Government of Bangladesh Logo" class="logo-img">
-            <span class="ms-2 fw-bold">Jonogoner Dorbar</span>
+            <span class="ms-2 fw-bold">জনগনের দরবার</span>
         </a>
         <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -11,7 +11,7 @@
         <div class="collapse navbar-collapse justify-content-center" id="ftco-nav">
             <ul class="navbar-nav" role="navigation" aria-label="Main navigation">
                 <li class="nav-item {{ request()->routeIs('home') ? 'active' : '' }}">
-                    <a href="{{ route('home') }}" class="nav-link">Home</a>
+                    <a href="{{ route('home') }}" class="nav-link">হোম</a>
                 </li>
                 <li class="nav-item {{ request()->is('ovijogs') ? 'active' : '' }}">
                     <a href="{{ url('ovijogs') }}" class="nav-link">অভিযোগ</a>
@@ -19,8 +19,8 @@
                 <li class="nav-item {{ request()->routeIs('main_registration') ? 'active' : '' }}">
                     <a href="{{ route('main_registration') }}" class="nav-link">অভিযোগ ট্র্যাকিং</a>
                 </li>
-                <li class="nav-item {{ request()->routeIs('payment_create') ? 'active' : '' }}">
-                    <a href="{{ route('payment_create') }}" class="nav-link">জরুরি সেবা</a>
+                <li class="nav-item {{ request()->routeIs('emergency.create') ? 'active' : '' }}">
+                    <a href="{{ route('emergency.create') }}" class="nav-link">জরুরি সেবা</a>
                 </li>
                 <li class="nav-item {{ request()->routeIs('chat.index') ? 'active' : '' }}">
                     <a href="{{ route('chat.index') }}" class="nav-link">লাইভ চ্যাট</a>
@@ -29,17 +29,17 @@
                 <li class="nav-item">
                     <a href="{{ route('logout') }}"
                         onclick="event.preventDefault(); document.getElementById('logout-form').submit();"
-                        class="nav-link">Logout</a>
+                        class="nav-link">লগ আউট</a>
                 </li>
                 <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                     @csrf
                 </form>
                 @else
                 <li class="nav-item {{ request()->routeIs('login') ? 'active' : '' }}">
-                    <a href="{{ route('login') }}" class="nav-link">Login</a>
+                    <a href="{{ route('login') }}" class="nav-link">লগইন</a>
                 </li>
                 <li class="nav-item {{ request()->routeIs('register') ? 'active' : '' }}">
-                    <a href="{{ route('register') }}" class="nav-link">Register</a>
+                    <a href="{{ route('register') }}" class="nav-link">রেজিস্টার</a>
                 </li>
                 @endauth
             </ul>

@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-  <title>HSTU-RDPC Schedule</title>
+  <title>Complaints</title>
   @include('home.css')
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
