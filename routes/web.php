@@ -8,9 +8,9 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\MessageController;
 use App\Http\Controllers\PaymentController;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -102,7 +102,14 @@ Route::get('admin/vumiseba', [AdminController::class, 'vumiseba'])->middleware([
 Route::post('admin/status-change/{id}', [AdminController::class, 'status_change'])->middleware(['auth', 'admin'])->name('status_change');
 Route::get('admin/vumiseba-delete/{id}', [AdminController::class, 'vumiseba_delete'])->middleware(['auth', 'admin'])->name('vumiseba_delete');
 Route::post('admin/type-change/{id}', [AdminController::class, 'type_change'])->middleware(['auth', 'admin'])->name('type_change');
+Route::get('admin/notice',[AdminController::class,'admin_notice'])->middleware(['auth', 'admin'])->name('admin.notice');
+Route::post('admin/notice-store', [AdminController::class, 'notice_store'])->middleware(['auth', 'admin'])->name('notice.store');
 
+
+Route::get('/admin/notice_show', [AdminController::class, 'notice_show'])->name('notice.show');
+Route::get('/admin/notice/edit/{id}', [AdminController::class, 'notice_edit'])->name('notice.edit');
+Route::post('/admin/notice/update/{id}', [AdminController::class, 'notice_update'])->name('notice.update');
+Route::get('/admin/notice/delete/{id}', [AdminController::class, 'notice_destroy'])->name('notice.delete');
 
 //after login
 Route::get('/user', [UserController::class, 'index'])->middleware(['auth'])->name('userindex');

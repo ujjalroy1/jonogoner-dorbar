@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Team;
 use App\Models\Payment;
 use App\Mail\TeamRegistrationMail;
+use App\Models\Notice;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
@@ -20,7 +21,8 @@ class HomeController extends Controller
     }
     public function home()
     {
-        return view('home.index');
+        $notices=Notice::all();
+        return view('home.index',compact('notices'));
     }
     public function registration()
     {
