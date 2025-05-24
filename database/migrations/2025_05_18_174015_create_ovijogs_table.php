@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained('users');
             $table->string('type');
+            $table->string('address')->nullable();
             $table->text('description');
             $table->string('attachment');
             $table->integer('hide');
@@ -22,6 +23,7 @@ return new class extends Migration
             $table->integer('feedback');
             $table->string('comment');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

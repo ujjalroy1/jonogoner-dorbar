@@ -61,10 +61,36 @@ class OvijogController extends Controller
 
         return redirect()->route('ovijogs.index')->with('success', 'Complaint deleted.');
     }
-    public function all_ovijogs()
+    public function all_ovijogs($id)
     {
-        $data=ovijog::with('user')->get();
+        if ($id == 1) {
+            $data = ovijog::with('user')->get();
 
-        return view('home.sobovijog',compact('data'));
+            return view('home.sobovijog', compact('data'));
+        }
+        else if($id == 2)
+        {
+           
+             $data = ovijog::with('user')->where('status','solved')->get();
+
+            return view('home.sobovijog', compact('data'));
+
+        }
+      else if($id == 3)
+        {
+           
+             $data = ovijog::with('user')->where('status','processing')->get();
+
+             return view('home.sobovijog', compact('data'));
+
+        }
+        else
+        {
+              $data = ovijog::with('user')->onlyTrashed()->get();
+
+             return view('home.sobovijog', compact('data'));
+
+        }
+        
     }
 }

@@ -94,13 +94,19 @@
             <div class="mb-3">
               <label for="type" class="form-label">ধরন</label>
               <select name="type" id="type" class="form-select" required>
-                <option value="A">ভোক্তা অধিকার</option>
-                <option value="B">সড়ক ও যানবাহন</option>
-                <option value="C">বিদ্যুৎ</option>
-                <option value="D">শিক্ষা</option>
-                <option value="E">নিরাপত্তা</option>
-                <option value="F">চিকিৎসা</option>
-                <option value="G">অন্যান্য</option>
+                <option disabled selected>একটি পছন্দ করুন</option>
+                <option value="1">ভূমি-সেবা</option>
+                <option value="2">স্বাস্থ্য-সেবা</option>
+                <option value="3">শিক্ষা-সেবা</option>
+                <option value="4">নিরাপত্তা ও শৃঙ্খলা</option>
+                <option value="5">পর্যটন ও ঐতিহ্য</option>
+                <option value="6">তথ্য অধিকার</option>
+                <option value="7">কর্মসম্পাদন ব্যবস্থাপনা</option>
+                <option value="8">মানব সম্পদ</option>
+                <option value="9">বাজেট ব্যবস্থাপনা</option>
+                <option value="10">আশ্রয়ণ প্রকল্প</option>
+                <option value="11">উদ্ভাবনী কার্যক্রম</option>
+                <option value="12">রাজস্ব সংক্রান্ত তথ্য</option>
               </select>
             </div>
 

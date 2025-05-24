@@ -51,6 +51,28 @@
         .btn-see-more:hover {
             background: linear-gradient(90deg, #6610f2, #0d6efd);
         }
+          .stat-card {
+        border-radius: 1rem;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        position: relative;
+    }
+
+    .stat-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
+    }
+
+    .icon-circle {
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 24px;
+        color: white;
+        margin-bottom: 10px;
+    }
     </style>
 </head>
 <body>
@@ -107,36 +129,6 @@
   </div>
 </div>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-
-</body>
-</html>
-
-
-<style>
-    .stat-card {
-        border-radius: 1rem;
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
-        position: relative;
-    }
-
-    .stat-card:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
-    }
-
-    .icon-circle {
-        width: 60px;
-        height: 60px;
-        border-radius: 50%;
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 24px;
-        color: white;
-        margin-bottom: 10px;
-    }
-</style>
 
 <div class="row text-center my-4 g-3">
     <div class="col-6 col-md-3">
@@ -146,7 +138,7 @@
             </div>
             <h6 class="text-secondary">মোট অভিযোগ</h6>
             <h2 class="text-dark fw-bold">1,245</h2>
-            <a href="{{ route('all_ovijogs') }}" class="stretched-link"></a>
+            <a href="{{ route('all_ovijogs',1) }}" class="stretched-link"></a>
         </div>
     </div>
 
@@ -157,7 +149,7 @@
             </div>
             <h6 class="text-secondary">সমাধান হয়েছে</h6>
             <h2 class="text-dark fw-bold">985</h2>
-            <a href="#" class="stretched-link"></a>
+            <a href="{{ route('all_ovijogs',2) }}" class="stretched-link"></a>
         </div>
     </div>
 
@@ -168,7 +160,7 @@
             </div>
             <h6 class="text-secondary">চলমান অভিযোগ</h6>
             <h2 class="text-dark fw-bold">210</h2>
-            <a href="#" class="stretched-link"></a>
+            <a href="{{ route('all_ovijogs',3) }}" class="stretched-link"></a>
         </div>
     </div>
 
@@ -179,7 +171,14 @@
             </div>
             <h6 class="text-secondary">বাতিল হয়েছে</h6>
             <h2 class="text-dark fw-bold">50</h2>
-            <a href="#" class="stretched-link"></a>
+            <a href="{{ route('all_ovijogs',4) }}" class="stretched-link"></a>
         </div>
     </div>
 </div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>
+
+
