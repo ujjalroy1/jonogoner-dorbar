@@ -44,7 +44,7 @@ class OvijogController extends Controller
             'description' => $request->description,
             'attachment' => json_encode($storedFiles),
             'hide' => $request->has('hide') ? 1 : 0,
-            'status' => 0,
+            'status' => "pending",
             'feedback' => 0,
             'comment' => "",
         ]);
@@ -62,6 +62,22 @@ class OvijogController extends Controller
 
         return redirect()->route('ovijogs.index')->with('success', 'Complaint deleted.');
     }
+    public function updateFeedback(Request $request, $id)
+    {
+        $request->validate([
+            'feedback' => 'required|integer|min:1|max:5',
+            'comment' => 'nullable|string|max:1000',
+        ]);
+
+        $ovijog = Ovijog::findOrFail($id);
+        $ovijog->feedback = $request->feedback;
+        $ovijog->comment = $request->comment;
+        $ovijog->save();
+
+        return back()->with('success', 'Feedback submitted successfully.');
+    }
+
+
     public function all_ovijogs($id)
     {
         if ($id == 1) {

@@ -71,6 +71,7 @@ Route::get('/ovijogs', [OvijogController::class, 'index'])->middleware(['auth'])
 Route::post('/ovijogs', [OvijogController::class, 'store'])->middleware(['auth'])->name('ovijogs.store');
 Route::delete('/ovijogs/{id}', [OvijogController::class, 'destroy'])->middleware(['auth'])->name('ovijogs.destroy');
 Route::get('/all-ovijogs/{id}', [OvijogController::class, 'all_ovijogs'])->name('all_ovijogs');
+Route::put('/ovijogs/feedback/{id}', [OvijogController::class, 'updateFeedback'])->name('ovijogs.feedback');
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/user/emergency', [EmergencyController::class, 'create'])->name('emergency.create');

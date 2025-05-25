@@ -30,8 +30,7 @@
                 <th>সংযুক্তি</th>
                 <th>পরিচয়</th>
                 <th>অবস্থা</th>
-                <th>প্রতিক্রিয়া</th>
-                <th>মন্তব্য</th>
+                <th>রেটিং দিন</th>
                 <th>মুছুন</th>
               </tr>
             </thead>
@@ -48,7 +47,7 @@
 
                   @if (is_array($attachments))
                   @foreach ($attachments as $file)
-                  <a href="{{ asset('storage/' . $file['path']) }}" download class="text-blue-600 hover:underline block">
+                  <a href="{{ asset('storage/' . $file['path']) }}" download class="text-primary d-block">
                     {{ $file['original'] }}
                   </a>
                   @endforeach
@@ -56,11 +55,37 @@
                   —
                   @endif
                 </td>
-
                 <td>{{ $item->hide }}</td>
-                <td>{{ $item->status }}</td>
-                <td>{{ $item->feedback ?? '—' }}</td>
-                <td>{{ $item->comment ?? 'নেই' }}</td>
+                <td>
+                  @php
+                  $statusLabels = [
+                  'pending' => 'Pending',
+                  'processing' => 'Processing',
+                  'complete' => 'Complete'
+                  ];
+                  @endphp
+
+                  <button class="btn btn-sm 
+          @if($item->status == 'pending') btn-secondary 
+          @elseif($item->status == 'processing') btn-warning 
+          @else btn-success 
+          @endif"
+                    data-bs-toggle="modal" data-bs-target="#statusModal{{ $item->id }}">
+                    {{ $statusLabels[$item->status] ?? 'Unknown' }}
+                  </button>
+                </td>
+
+                <td>
+                  @if ($item->feedback)
+                  <button class="btn btn-sm btn-success" data-bs-toggle="modal" data-bs-target="#feedbackModal{{ $item->id }}">
+                    {{ $item->feedback }} ⭐
+                  </button>
+                  @else
+                  <button class="btn btn-sm btn-warning" data-bs-toggle="modal" data-bs-target="#feedbackModal{{ $item->id }}">
+                    Rate
+                  </button>
+                  @endif
+                </td>
                 <td>
                   <form method="POST" action="{{ route('ovijogs.destroy', $item->id) }}">
                     @csrf
@@ -69,6 +94,59 @@
                   </form>
                 </td>
               </tr>
+              <!-- Status Info Modal -->
+              <div class="modal fade" id="statusModal{{ $item->id }}" tabindex="-1" aria-labelledby="statusModalLabel{{ $item->id }}" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                  <div class="modal-content border-0 shadow-lg">
+                    <div class="modal-header bg-info text-white">
+                      <h5 class="modal-title" id="statusModalLabel{{ $item->id }}">অবস্থার বিস্তারিত</h5>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                      <div class="d-flex justify-content-between align-items-center">
+                        <span class="badge {{ $item->status == 'pending' ? 'bg-secondary' : 'bg-light text-muted' }}">Pending</span>
+                        <span class="text-muted mx-2">→</span>
+                        <span class="badge {{ $item->status == 'processing' ? 'bg-warning' : 'bg-light text-muted' }}">Processing</span>
+                        <span class="text-muted mx-2">→</span>
+                        <span class="badge {{ $item->status == 'completed' ? 'bg-success' : 'bg-light text-muted' }}">Completed</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- Feedback Modal -->
+              <div class="modal fade" id="feedbackModal{{ $item->id }}" tabindex="-1" aria-labelledby="feedbackLabel{{ $item->id }}" aria-hidden="true">
+                <div class="modal-dialog">
+                  <form method="POST" action="{{ route('ovijogs.feedback', $item->id) }}">
+                    @csrf
+                    @method('PUT')
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="feedbackLabel{{ $item->id }}">ফিডব্যাক দিন</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                      </div>
+                      <div class="modal-body">
+                        <div class="mb-3">
+                          <label for="feedback" class="form-label">রেটিং (1-5)</label>
+                          <select name="feedback" class="form-select" required>
+                            <option value="">-- একটি নির্বাচন করুন --</option>
+                            @for ($i = 1; $i <= 5; $i++)
+                              <option value="{{ $i }}" {{ $item->feedback == $i ? 'selected' : '' }}>{{ $i }} ⭐</option>
+                              @endfor
+                          </select>
+                        </div>
+                        <div class="mb-3">
+                          <label for="comment" class="form-label">মন্তব্য</label>
+                          <textarea name="comment" class="form-control" rows="3" placeholder="আপনার মন্তব্য">{{ $item->comment }}</textarea>
+                        </div>
+                      </div>
+                      <div class="modal-footer">
+                        <button type="submit" class="btn btn-success">জমা দিন</button>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              </div>
               @empty
               <tr>
                 <td colspan="8" class="text-center text-muted">কোনো অভিযোগ নেই</td>
@@ -81,12 +159,11 @@
     </div>
   </div>
 
-  <!-- Modal -->
+  <!-- Complaint Modal -->
   <div class="modal fade" id="complaintModal" tabindex="-1" aria-labelledby="complaintModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
         <form method="POST" action="{{ route('ovijogs.store') }}" enctype="multipart/form-data">
-
           @csrf
           <div class="modal-header">
             <h5 class="modal-title" id="complaintModalLabel">অভিযোগ জমা দিন</h5>
@@ -123,10 +200,9 @@
             </div>
 
             <div class="mb-4">
-              <label class="block font-medium">সংযুক্তি (যদি থাকে)</label>
+              <label class="form-label">সংযুক্তি (যদি থাকে)</label>
               <input type="file" name="attachment[]" class="form-control" multiple>
             </div>
-
 
             <div class="form-check mb-3">
               <input type="checkbox" name="hide" value="1" class="form-check-input" id="hideCheckbox">
