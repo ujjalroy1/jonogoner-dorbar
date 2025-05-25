@@ -1,93 +1,107 @@
 <!DOCTYPE html>
 <html lang="bn">
+
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>নোটিশ বোর্ড ডেমো</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet" />
-    <style>
-        .notice-card {
-            border-radius: 1rem;
-            box-shadow: 0 4px 15px rgba(13, 110, 253, 0.1);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            background: #fff;
-        }
-        .notice-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 30px rgba(13, 110, 253, 0.3);
-        }
-        .notice-title {
-            font-size: 1.25rem;
-            font-weight: 700;
-            color: #0d6efd;
-            transition: color 0.3s ease;
-            text-decoration: none;
-        }
-        .notice-title:hover {
-            color: #6610f2;
-            text-decoration: underline;
-        }
-        .notice-summary {
-            font-size: 0.95rem;
-            color: #555;
-            min-height: 60px;
-        }
-        .notice-date {
-            font-size: 0.85rem;
-            color: #6c757d;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            font-weight: 500;
-        }
-        .btn-see-more {
-            background: linear-gradient(90deg, #0d6efd, #6610f2);
-            border: none;
-            font-weight: 600;
-            box-shadow: 0 4px 12px rgba(102, 16, 242, 0.4);
-            transition: background 0.3s ease;
-        }
-        .btn-see-more:hover {
-            background: linear-gradient(90deg, #6610f2, #0d6efd);
-        }
-          .stat-card {
-        border-radius: 1rem;
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
-        position: relative;
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>নোটিশ বোর্ড </title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet" />
+  <style>
+    .notice-card {
+      border-radius: 1rem;
+      box-shadow: 0 4px 15px rgba(13, 110, 253, 0.1);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      background: #fff;
+    }
+
+    .notice-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 30px rgba(13, 110, 253, 0.3);
+    }
+
+    .notice-title {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: #0d6efd;
+      transition: color 0.3s ease;
+      text-decoration: none;
+    }
+
+    .notice-title:hover {
+      color: #6610f2;
+      text-decoration: underline;
+    }
+
+    .notice-summary {
+      font-size: 0.95rem;
+      color: #555;
+      min-height: 60px;
+    }
+
+    .notice-date {
+      font-size: 0.85rem;
+      color: #6c757d;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-weight: 500;
+    }
+
+    .btn-see-more {
+      background: linear-gradient(90deg, #0d6efd, #6610f2);
+      border: none;
+      font-weight: 600;
+      box-shadow: 0 4px 12px rgba(102, 16, 242, 0.4);
+      transition: background 0.3s ease;
+    }
+
+    .btn-see-more:hover {
+      background: linear-gradient(90deg, #6610f2, #0d6efd);
+    }
+
+    .stat-card {
+      border-radius: 1rem;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      position: relative;
     }
 
     .stat-card:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
+      transform: translateY(-5px);
+      box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
     }
 
     .icon-circle {
-        width: 60px;
-        height: 60px;
-        border-radius: 50%;
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 24px;
-        color: white;
-        margin-bottom: 10px;
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      color: white;
+      margin-bottom: 10px;
     }
-    </style>
+  </style>
 </head>
+
 <body>
 
-<div class="container py-5">
-  <div class="row justify-content-center">
-    <div class="col-xl-10 col-lg-11">
-      <h4 class="mb-5 text-primary fw-bold d-flex align-items-center gap-2">
-        <i class="bi bi-megaphone-fill fs-4"></i> 📣 নোটিশ বোর্ড
-      </h4>
+  <div class="container py-5">
+    <div class="row justify-content-center">
+      <div class="col-xl-10 col-lg-11">
+        <h4 class="mb-5 text-primary fw-bold d-flex align-items-center gap-2">
+          <i class="bi bi-megaphone-fill fs-4"></i> 📣 নোটিশ বোর্ড
+        </h4>
 
-      <div class="row g-4 row-cols-1 row-cols-sm-2 row-cols-md-3">
+        <div class="row g-4 row-cols-1 row-cols-sm-2 row-cols-md-3">
 
-
-        @foreach ($notices as $notice)
+          @php $i = 0; @endphp
+          @foreach ($notices as $notice)
+          @php $i++; @endphp
+          @if ($i >= 8)
+          @break
+          @endif
           <div class="col">
             <div class="card notice-card h-100">
               <div class="card-body d-flex flex-column">
@@ -107,69 +121,68 @@
               </div>
             </div>
           </div>
-        @endforeach
+          @endforeach
 
-      </div>
+        </div>
 
-      <div class="text-center mt-5">
-        <a href="#" class="btn btn-see-more px-4 py-2 rounded-pill text-white shadow-sm">
-          আরও নোটিশ দেখুন <i class="bi bi-arrow-right ms-2"></i>
-        </a>
+        <div class="text-center mt-5">
+          <a href="#" class="btn btn-see-more px-4 py-2 rounded-pill text-white shadow-sm">
+            আরও নোটিশ দেখুন <i class="bi bi-arrow-right ms-2"></i>
+          </a>
+        </div>
       </div>
     </div>
   </div>
-</div>
 
 
-<div class="row text-center my-4 g-3">
+  <div class="row text-center my-4 g-3">
     <div class="col-6 col-md-3">
-        <div class="card stat-card bg-light shadow-sm p-3">
-            <div class="icon-circle bg-primary mx-auto">
-                <i class="bi bi-clipboard-data"></i>
-            </div>
-            <h6 class="text-secondary">মোট অভিযোগ</h6>
-            <h2 class="text-dark fw-bold">1,245</h2>
-            <a href="{{ route('all_ovijogs',1) }}" class="stretched-link"></a>
+      <div class="card stat-card bg-light shadow-sm p-3">
+        <div class="icon-circle bg-primary mx-auto">
+          <i class="bi bi-clipboard-data"></i>
         </div>
+        <h6 class="text-secondary">মোট অভিযোগ</h6>
+        <h2 class="text-dark fw-bold">1,245</h2>
+        <a href="{{ route('all_ovijogs',1) }}" class="stretched-link"></a>
+      </div>
     </div>
 
     <div class="col-6 col-md-3">
-        <div class="card stat-card bg-light shadow-sm p-3">
-            <div class="icon-circle bg-success mx-auto">
-                <i class="bi bi-check-circle"></i>
-            </div>
-            <h6 class="text-secondary">সমাধান হয়েছে</h6>
-            <h2 class="text-dark fw-bold">985</h2>
-            <a href="{{ route('all_ovijogs',2) }}" class="stretched-link"></a>
+      <div class="card stat-card bg-light shadow-sm p-3">
+        <div class="icon-circle bg-success mx-auto">
+          <i class="bi bi-check-circle"></i>
         </div>
+        <h6 class="text-secondary">সমাধান হয়েছে</h6>
+        <h2 class="text-dark fw-bold">985</h2>
+        <a href="{{ route('all_ovijogs',2) }}" class="stretched-link"></a>
+      </div>
     </div>
 
     <div class="col-6 col-md-3">
-        <div class="card stat-card bg-light shadow-sm p-3">
-            <div class="icon-circle bg-warning mx-auto">
-                <i class="bi bi-hourglass-split"></i>
-            </div>
-            <h6 class="text-secondary">চলমান অভিযোগ</h6>
-            <h2 class="text-dark fw-bold">210</h2>
-            <a href="{{ route('all_ovijogs',3) }}" class="stretched-link"></a>
+      <div class="card stat-card bg-light shadow-sm p-3">
+        <div class="icon-circle bg-warning mx-auto">
+          <i class="bi bi-hourglass-split"></i>
         </div>
+        <h6 class="text-secondary">চলমান অভিযোগ</h6>
+        <h2 class="text-dark fw-bold">210</h2>
+        <a href="{{ route('all_ovijogs',3) }}" class="stretched-link"></a>
+      </div>
     </div>
 
     <div class="col-6 col-md-3">
-        <div class="card stat-card bg-light shadow-sm p-3">
-            <div class="icon-circle bg-danger mx-auto">
-                <i class="bi bi-x-circle"></i>
-            </div>
-            <h6 class="text-secondary">বাতিল হয়েছে</h6>
-            <h2 class="text-dark fw-bold">50</h2>
-            <a href="{{ route('all_ovijogs',4) }}" class="stretched-link"></a>
+      <div class="card stat-card bg-light shadow-sm p-3">
+        <div class="icon-circle bg-danger mx-auto">
+          <i class="bi bi-x-circle"></i>
         </div>
+        <h6 class="text-secondary">বাতিল হয়েছে</h6>
+        <h2 class="text-dark fw-bold">50</h2>
+        <a href="{{ route('all_ovijogs',4) }}" class="stretched-link"></a>
+      </div>
     </div>
-</div>
+  </div>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
 </body>
+
 </html>
-
-
