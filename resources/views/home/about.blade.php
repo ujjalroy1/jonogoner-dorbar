@@ -99,7 +99,7 @@
           @php $i = 0; @endphp
           @foreach ($notices as $notice)
           @php $i++; @endphp
-          @if ($i >= 8)
+          @if ($i >= 7)
           @break
           @endif
           <div class="col">
@@ -126,7 +126,7 @@
         </div>
 
         <div class="text-center mt-5">
-          <a href="#" class="btn btn-see-more px-4 py-2 rounded-pill text-white shadow-sm">
+          <a href="{{ route('all.notice') }}" class="btn btn-see-more px-4 py-2 rounded-pill text-white shadow-sm">
             আরও নোটিশ দেখুন <i class="bi bi-arrow-right ms-2"></i>
           </a>
         </div>
