@@ -6,7 +6,8 @@ use App\Models\Emergency;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
-
+use Illuminate\Support\Facades\Mail;
+use App\Mail\EmergencyNotification;
 
 class EmergencyController extends Controller
 {
@@ -36,7 +37,7 @@ class EmergencyController extends Controller
             $attachmentPath = $request->file('attachment')->store('attachments', 'public');
         }
 
-        Emergency::create([
+        $emergency = Emergency::create([
             'user_id' => Auth::id(),
             'type' => $validated['type'],
             'description' => $validated['description'],
@@ -47,6 +48,7 @@ class EmergencyController extends Controller
             'comment' => $validated['comment'] ?? null,
         ]);
 
+        Mail::to('dbabhijite@gmail.com')->send(new EmergencyNotification($emergency));
         return redirect()->back()->with('success', 'Emergency message sent successfully!');
     }
     public function updateStatus(Request $request, Emergency $emergency)
