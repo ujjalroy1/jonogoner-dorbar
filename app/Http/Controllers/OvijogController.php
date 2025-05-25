@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Notice;
 use App\Models\Ovijog;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -99,5 +100,10 @@ class OvijogController extends Controller
 
             return view('home.sobovijog', compact('data'));
         }
+    }
+    public function all_notice()
+    {
+        $notices=Notice::all();
+        return view('home.all_notice',compact('notices'));
     }
 }

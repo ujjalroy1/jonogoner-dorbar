@@ -72,6 +72,8 @@ Route::post('/ovijogs', [OvijogController::class, 'store'])->middleware(['auth']
 Route::delete('/ovijogs/{id}', [OvijogController::class, 'destroy'])->middleware(['auth'])->name('ovijogs.destroy');
 Route::get('/all-ovijogs/{id}', [OvijogController::class, 'all_ovijogs'])->name('all_ovijogs');
 Route::put('/ovijogs/feedback/{id}', [OvijogController::class, 'updateFeedback'])->name('ovijogs.feedback');
+Route::get('/all-notice', [OvijogController::class, 'all_notice'])->middleware(['auth'])->name('all.notice');
+
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/user/emergency', [EmergencyController::class, 'create'])->name('emergency.create');
@@ -111,6 +113,7 @@ Route::get('/admin/notice_show', [AdminController::class, 'notice_show'])->name(
 Route::get('/admin/notice/edit/{id}', [AdminController::class, 'notice_edit'])->name('notice.edit');
 Route::post('/admin/notice/update/{id}', [AdminController::class, 'notice_update'])->name('notice.update');
 Route::get('/admin/notice/delete/{id}', [AdminController::class, 'notice_destroy'])->name('notice.delete');
+
 
 //after login
 Route::get('/user', [UserController::class, 'index'])->middleware(['auth'])->name('userindex');

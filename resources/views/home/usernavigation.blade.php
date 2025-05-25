@@ -1,7 +1,7 @@
 <nav class="navbar navbar-expand-lg navbar-dark shadow-sm fixed-top">
     <div class="container d-flex align-items-center justify-content-between">
         <!-- Left Logo & Title -->
-        <a class="navbar-brand d-flex align-items-center" href="{{ route('home') }}">
+        <a class="navbar-brand d-flex align-items-center" href="{{ route('userindex') }}">
             <img src="{{ asset('user_view/images/bdgovt.png') }}" alt="Logo 1" class="logo-img">
             <span class="ml-2 fw-bold">Jonogoner Dorbar</span>
         </a>
