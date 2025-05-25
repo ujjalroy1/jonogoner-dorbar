@@ -70,6 +70,7 @@ use App\Http\Controllers\UserController;
 Route::get('/ovijogs', [OvijogController::class, 'index'])->middleware(['auth'])->name('ovijogs.index');
 Route::post('/ovijogs', [OvijogController::class, 'store'])->middleware(['auth'])->name('ovijogs.store');
 Route::delete('/ovijogs/{id}', [OvijogController::class, 'destroy'])->middleware(['auth'])->name('ovijogs.destroy');
+Route::get('/complaints_tracking', [OvijogController::class, 'tracking'])->middleware(['auth'])->name('complaints.tracking');
 Route::get('/all-ovijogs/{id}', [OvijogController::class, 'all_ovijogs'])->name('all_ovijogs');
 Route::put('/ovijogs/feedback/{id}', [OvijogController::class, 'updateFeedback'])->name('ovijogs.feedback');
 
@@ -103,7 +104,7 @@ Route::get('admin/vumiseba', [AdminController::class, 'vumiseba'])->middleware([
 Route::post('admin/status-change/{id}', [AdminController::class, 'status_change'])->middleware(['auth', 'admin'])->name('status_change');
 Route::get('admin/vumiseba-delete/{id}', [AdminController::class, 'vumiseba_delete'])->middleware(['auth', 'admin'])->name('vumiseba_delete');
 Route::post('admin/type-change/{id}', [AdminController::class, 'type_change'])->middleware(['auth', 'admin'])->name('type_change');
-Route::get('admin/notice',[AdminController::class,'admin_notice'])->middleware(['auth', 'admin'])->name('admin.notice');
+Route::get('admin/notice', [AdminController::class, 'admin_notice'])->middleware(['auth', 'admin'])->name('admin.notice');
 Route::post('admin/notice-store', [AdminController::class, 'notice_store'])->middleware(['auth', 'admin'])->name('notice.store');
 
 

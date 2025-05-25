@@ -15,6 +15,11 @@ class OvijogController extends Controller
         // dd($ovijogs);
         return view('home.complaints', compact('ovijogs'));
     }
+    public function tracking()
+    {
+        $ovijogs = Ovijog::where('user_id', Auth::user()->id)->get();
+        return view('home.complaints_tracking', compact('ovijogs'));
+    }
 
     // Store a new complaint
     public function store(Request $request)
@@ -51,16 +56,13 @@ class OvijogController extends Controller
 
         return redirect()->route('ovijogs.index')->with('success', 'Complaint registered successfully.');
     }
-
-
-
     // Delete a complaint
     public function destroy($id)
     {
         $ovijog = Ovijog::where('id', $id)->where('user_id', Auth::user()->id)->firstOrFail();
         $ovijog->delete();
 
-        return redirect()->route('ovijogs.index')->with('success', 'Complaint deleted.');
+        return redirect()->route('complaints.tracking')->with('success', 'Complaint deleted.');
     }
     public function updateFeedback(Request $request, $id)
     {

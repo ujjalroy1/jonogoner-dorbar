@@ -21,8 +21,8 @@
                 <li class="nav-item {{ request()->is('ovijogs') ? 'active' : '' }}">
                     <a class="nav-link" href="{{ url('ovijogs') }}">অভিযোগ</a>
                 </li>
-                <li class="nav-item {{ request()->routeIs('main_registration') ? 'active' : '' }}">
-                    <a class="nav-link" href="{{ route('main_registration') }}">অভিযোগ ট্র্যাকিং</a>
+                <li class="nav-item {{ request()->routeIs('complaints.tracking') ? 'active' : '' }}">
+                    <a class="nav-link" href="{{ route('complaints.tracking') }}">অভিযোগ ট্র্যাকিং</a>
                 </li>
                 <li class="nav-item {{ request()->routeIs('emergency.create') ? 'active' : '' }}">
                     <a class="nav-link" href="{{ route('emergency.create') }}">জরুরি সেবা</a>
