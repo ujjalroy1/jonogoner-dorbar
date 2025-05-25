@@ -40,6 +40,7 @@ class OvijogController extends Controller
         Ovijog::create([
             'user_id' => Auth::user()->id,
             'type' => $request->type,
+            'address' => $request->address,
             'description' => $request->description,
             'attachment' => json_encode($storedFiles),
             'hide' => $request->has('hide') ? 1 : 0,
@@ -67,30 +68,20 @@ class OvijogController extends Controller
             $data = ovijog::with('user')->get();
 
             return view('home.sobovijog', compact('data'));
-        }
-        else if($id == 2)
-        {
-           
-             $data = ovijog::with('user')->where('status','solved')->get();
+        } else if ($id == 2) {
+
+            $data = ovijog::with('user')->where('status', 'solved')->get();
 
             return view('home.sobovijog', compact('data'));
+        } else if ($id == 3) {
 
+            $data = ovijog::with('user')->where('status', 'processing')->get();
+
+            return view('home.sobovijog', compact('data'));
+        } else {
+            $data = ovijog::with('user')->onlyTrashed()->get();
+
+            return view('home.sobovijog', compact('data'));
         }
-      else if($id == 3)
-        {
-           
-             $data = ovijog::with('user')->where('status','processing')->get();
-
-             return view('home.sobovijog', compact('data'));
-
-        }
-        else
-        {
-              $data = ovijog::with('user')->onlyTrashed()->get();
-
-             return view('home.sobovijog', compact('data'));
-
-        }
-        
     }
 }

@@ -25,6 +25,7 @@
             <thead class="table-light">
               <tr>
                 <th>ধরন</th>
+                <th>স্থান</th>
                 <th>বর্ণনা</th>
                 <th>সংযুক্তি</th>
                 <th>পরিচয়</th>
@@ -38,6 +39,7 @@
               @forelse ($ovijogs as $item)
               <tr>
                 <td>{{ $item->type }}</td>
+                <td>{{ $item->address }}</td>
                 <td>{{ $item->description }}</td>
                 <td class="py-2 px-4">
                   @php
@@ -108,6 +110,11 @@
                 <option value="11">উদ্ভাবনী কার্যক্রম</option>
                 <option value="12">রাজস্ব সংক্রান্ত তথ্য</option>
               </select>
+            </div>
+
+            <div class="mb-3">
+              <label for="address" class="form-label">স্থান</label>
+              <input type="text" name="address" id="address" class="form-control" placeholder="বাশেরহাট, দিনাজপুর" required>
             </div>
 
             <div class="mb-3">

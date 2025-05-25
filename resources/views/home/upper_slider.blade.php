@@ -188,7 +188,7 @@
             <div class="swiper-slide">
                 <img src="{{ asset('user_view/images/Upper_View_Of_HSTU.jpg') }}" class="img-fluid w-100 h-100 object-fit-cover rounded" alt="HSTU View">
                 <div class="slider-content">
-                    <h1 class="slider-title">Welcome to HSTU</h1>
+                    <h1 class="slider-title">হাজী মোহাম্মাদ দানেশ বিজ্ঞান ও প্রযুক্তি বিশ্ববিদ্যালয়</h1>
                     <!-- <p class="slider-text">Discover Excellence in Education and Innovation</p>
                     <a href="#" class="btn btn-slider">Explore Campus</a> -->
                 </div>
@@ -198,7 +198,7 @@
             <div class="swiper-slide">
                 <img src="{{ asset('user_view/images/West_side_of_Sura_Mosque.jpg') }}" class="img-fluid w-100 h-100 object-fit-cover rounded" alt="Sura Mosque">
                 <div class="slider-content">
-                    <h1 class="slider-title">Historic Campus Gate</h1>
+                    <h1 class="slider-title">নয়াবাদ মসজিদ</h1>
                     <!-- <p class="slider-text">Gateway to Knowledge and Opportunity</p>
                     <a href="#" class="btn btn-slider">View History</a> -->
                 </div>
@@ -208,7 +208,7 @@
             <div class="swiper-slide">
                 <img src="{{ asset('user_view/images/Ramsagor_horse.jpg') }}" class="img-fluid w-100 h-100 object-fit-cover rounded" alt="Ramsagor">
                 <div class="slider-content">
-                    <h1 class="slider-title">Ramsagor Horse</h1>
+                    <h1 class="slider-title">রামসাগর</h1>
                     <!-- <a href="#" class="btn btn-slider">View History</a> -->
                 </div>
             </div>
@@ -217,7 +217,7 @@
             <div class="swiper-slide">
                 <img src="{{ asset('user_view/images/Sitakot_Bihara_1.jpg') }}" class="img-fluid w-100 h-100 object-fit-cover rounded" alt="Sitakot Bihara">
                 <div class="slider-content">
-                    <h1 class="slider-title">Sitakot Bihara</h1>
+                    <h1 class="slider-title">সীতাকোট বিহার</h1>
                     <!-- <p class="slider-text">Gateway to Knowledge and Opportunity</p>
                     <a href="#" class="btn btn-slider">View History</a> -->
                 </div>
@@ -227,7 +227,7 @@
             <div class="swiper-slide">
                 <img src="{{ asset('user_view/images/Noyabaad_Mosque_(6).jpg') }}" class="img-fluid w-100 h-100 object-fit-cover rounded" alt="Noyabaad Mosque">
                 <div class="slider-content">
-                    <h1 class="slider-title">Noyabaad Mosque</h1>
+                    <h1 class="slider-title">নয়াবাদ মসজিদ</h1>
                     <!-- <p class="slider-text">Gateway to Knowledge and Opportunity</p>
                     <a href="#" class="btn btn-slider">View History</a> -->
                 </div>
