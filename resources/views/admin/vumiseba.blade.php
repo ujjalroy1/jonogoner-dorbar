@@ -71,7 +71,7 @@
                                         @endif
                                     </td>
                                     <td>
-                                        @if ($ovijog->hide == 1)
+                                        @if ($ovijog->hide == 0)
                                         {{ $ovijog->user->name ?? 'N/A' }}
                                         @else
                                         N/A

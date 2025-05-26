@@ -47,7 +47,7 @@
                             @endif
                         </td>
                         <td>
-                            @if ($ovijog->hide == 1)
+                            @if ($ovijog->hide == 0)
                             <i class="fas fa-user-circle text-secondary"></i> {{ $ovijog->user->name ?? 'Annonymus' }}
                             @else
                             <span class="text-muted">N/A</span>
