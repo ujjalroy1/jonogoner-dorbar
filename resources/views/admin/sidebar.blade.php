@@ -36,13 +36,14 @@
       </li>
       <li>
         <a href="#noticeDropdown" aria-expanded="false" data-toggle="collapse">
-         <i class="icon-windows"></i> নোটিশ
+          <i class="icon-windows"></i> নোটিশ
         </a>
         <ul id="noticeDropdown" class="collapse list-unstyled">
           <li><a href="{{ route('admin.notice') }}">নোটিশ যুক্ত করুন</a></li>
           <li><a href="{{ route('notice.show') }}">সব নোটিশ দেখুন</a></li>
         </ul>
       </li>
+      <li><a href="{{ route('admin.chat.index') }}"></a></li>
 
 
 
