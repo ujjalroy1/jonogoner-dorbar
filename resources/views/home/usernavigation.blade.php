@@ -68,9 +68,14 @@
         </div>
 
 
-        <a class="navbar-brand d-none d-lg-block" href="{{ route('profile.edit') }}">
-            <img src="{{ asset('user_view/images/profilelogo.png') }}" alt="Logo 2" class="logo-img">
-        </a>
+        @auth
+        <div class="d-flex align-items-center">
+            <span class="me-2">Hello, {{ Auth::user()->name }}</span>
+            <a class="navbar-brand d-none d-lg-block" href="{{ route('profile.edit') }}">
+                <img src="{{ asset('user_view/images/profilelogo.png') }}" alt="Logo 2" class="logo-img">
+            </a>
+        </div>
+        @endauth
     </div>
 </nav>
 
