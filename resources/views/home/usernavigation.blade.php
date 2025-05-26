@@ -3,7 +3,7 @@
         <!-- Left Logo & Title -->
         <a class="navbar-brand d-flex align-items-center" href="{{ route('userindex') }}">
             <img src="{{ asset('user_view/images/bdgovt.png') }}" alt="Logo 1" class="logo-img">
-            <span class="ml-2 fw-bold">Jonogoner Dorbar</span>
+            <span class="ml-2 fw-bold">জনগনের দরবার</span>
         </a>
         <button class="navbar-toggler border-0" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -11,13 +11,13 @@
         <div class="collapse navbar-collapse justify-content-center" id="ftco-nav">
             <ul class="navbar-nav">
                 <li class="nav-item {{ request()->routeIs('home') ? 'active' : '' }}">
-                    <a href="{{ route('userindex') }}" class="nav-link">Home</a>
+                    <a href="{{ route('userindex') }}" class="nav-link">হোম</a>
                 </li>
                 <li class="nav-item {{ request()->is('ovijogs') ? 'active' : '' }}">
                     <a href="{{url('ovijogs')}}" class="nav-link">অভিযোগ</a>
                 </li>
                 <li class="nav-item {{ request()->routeIs('main_registration') ? 'active' : '' }}">
-                    <a href="{{ route('main_registration') }}" class="nav-link">অভিযোগ ট্র্যাকিং</a>
+                    <a href="{{ route('complaints.tracking') }}" class="nav-link">অভিযোগ ট্র্যাকিং</a>
                 </li>
                 <li class="nav-item {{ request()->routeIs('payment_create') ? 'active' : '' }}">
                     <a href="{{ route('payment_create') }}" class="nav-link">জরুরি সেবা</a>
@@ -47,7 +47,7 @@
                     <a href="{{ route('logout') }}"
                         onclick="event.preventDefault(); document.getElementById('logout-form').submit();"
                         class="nav-link">
-                        Logout
+                       লগ আউট
                     </a>
                 </li>
                 <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
