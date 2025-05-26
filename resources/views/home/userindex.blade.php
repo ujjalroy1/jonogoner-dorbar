@@ -15,7 +15,7 @@
 	 <!-- end upperslider -->
 		
     <!-- about -->
-     @include('home.userabout')
+     @include('home.about')
 	<!-- end about -->
 
 	 <!-- slot -->
