@@ -102,7 +102,7 @@ Route::middleware(['auth', 'admin'])->group(function () {
 });
 
 //admin department
-Route::get('admin/vumiseba', [AdminController::class, 'vumiseba'])->middleware(['auth', 'admin'])->name('vumiseba');
+Route::get('admin/vumiseba/{id}', [AdminController::class, 'vumiseba'])->middleware(['auth', 'admin'])->name('vumiseba');
 Route::post('admin/status-change/{id}', [AdminController::class, 'status_change'])->middleware(['auth', 'admin'])->name('status_change');
 Route::get('admin/vumiseba-delete/{id}', [AdminController::class, 'vumiseba_delete'])->middleware(['auth', 'admin'])->name('vumiseba_delete');
 Route::post('admin/type-change/{id}', [AdminController::class, 'type_change'])->middleware(['auth', 'admin'])->name('type_change');

@@ -10,10 +10,19 @@ class AdminController extends Controller
 {
     //
 
-    public function vumiseba()
+    public function vumiseba($id)
     {
-        $ovijogs = ovijog::with('user')->where('type', '1')->get();
-        return view('admin.vumiseba', compact('ovijogs'));
+               $ovijogs = ovijog::with('user')->where('type', $id)->get();
+               return view('admin.vumiseba', compact('ovijogs'));
+
+
+        // if ($id == 1) {
+        //     $ovijogs = ovijog::with('user')->where('type', '1')->get();
+        //     return view('admin.vumiseba', compact('ovijogs'));
+        // } elseif ($id == 2) {
+        //     $ovijogs = ovijog::with('user')->where('type', $id)->get();
+        //     return view('admin.vumiseba', compact('ovijogs'));
+        // }
     }
     public function status_change(Request $request, $id)
     {
@@ -78,7 +87,7 @@ class AdminController extends Controller
     }
     public function notice_show()
     {
-         $notices = Notice::all();
+        $notices = Notice::all();
         return view('admin.notice_show', compact('notices'));
     }
     public function notice_edit($id)
@@ -102,7 +111,7 @@ class AdminController extends Controller
 
         return redirect()->route('notice.show')->with('success', 'নোটিশ সফলভাবে আপডেট করা হয়েছে!');
     }
-     public function notice_destroy($id)
+    public function notice_destroy($id)
     {
         $notice = Notice::findOrFail($id);
         $notice->delete();

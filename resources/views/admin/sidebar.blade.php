@@ -20,29 +20,30 @@
                 <li><a href="forms.html"> <i class="icon-padnote"></i>Forms </a></li> -->
       <li><a href="#exampledropdownDropdown" aria-expanded="false" data-toggle="collapse"> <i class="icon-windows"></i>ডিপার্টমেন্ট</a>
         <ul id="exampledropdownDropdown" class="collapse list-unstyled ">
-          <li><a href="{{ url('admin/vumiseba') }}">ভূমি-সেবা</a></li>
-          <li><a href="#">স্বাস্থ্য-সেবা</a></li>
-          <li><a href="#">শিক্ষা-সেবা</a></li>
-          <li><a href="#">নিরাপত্তা ও শৃঙ্খলা</a></li>
-          <li><a href="#">পর্যটন ও ঐতিহ্য</a></li>
-          <li><a href="#">তথ্য অধিকার</a></li>
-          <li><a href="#">কর্মসম্পাদন ব্যবস্থাপনা</a></li>
-          <li><a href="#">মানব সম্পদ</a></li>
-          <li><a href="#">বাজেট ব্যবস্থাপনা</a></li>
-          <li><a href="#">আশ্রয়ণ প্রকল্প</a></li>
-          <li><a href="#">উদ্ভাবনী কার্যক্রম</a></li>
-          <li><a href="#">রাজস্ব সংক্রান্ত তথ্য</a></li>
+          <li><a href="{{ url('admin/vumiseba',1) }}">ভূমি-সেবা</a></li>
+          <li><a href="{{ url('admin/vumiseba',2) }}">স্বাস্থ্য-সেবা</a></li>
+          <li><a href="{{ url('admin/vumiseba',3) }}">শিক্ষা-সেবা</a></li>
+          <li><a href="{{ url('admin/vumiseba',4) }}">নিরাপত্তা ও শৃঙ্খলা</a></li>
+          <li><a href="{{ url('admin/vumiseba',5) }}">পর্যটন ও ঐতিহ্য</a></li>
+          <li><a href="{{ url('admin/vumiseba',6) }}">তথ্য অধিকার</a></li>
+          <li><a href="{{ url('admin/vumiseba',7) }}">কর্মসম্পাদন ব্যবস্থাপনা</a></li>
+          <li><a href="{{ url('admin/vumiseba',8) }}">মানব সম্পদ</a></li>
+          <li><a href="{{ url('admin/vumiseba',9) }}">বাজেট ব্যবস্থাপনা</a></li>
+          <li><a href="{{ url('admin/vumiseba',10) }}">আশ্রয়ণ প্রকল্প</a></li>
+          <li><a href="{{ url('admin/vumiseba',11) }}">উদ্ভাবনী কার্যক্রম</a></li>
+          <li><a href="{{ url('admin/vumiseba',12) }}">রাজস্ব সংক্রান্ত তথ্য</a></li>
         </ul>
       </li>
       <li>
         <a href="#noticeDropdown" aria-expanded="false" data-toggle="collapse">
-         <i class="icon-windows"></i> নোটিশ
+          <i class="icon-windows"></i> নোটিশ
         </a>
         <ul id="noticeDropdown" class="collapse list-unstyled">
           <li><a href="{{ route('admin.notice') }}">নোটিশ যুক্ত করুন</a></li>
           <li><a href="{{ route('notice.show') }}">সব নোটিশ দেখুন</a></li>
         </ul>
       </li>
+      <li><a href="{{ route('admin.chat.index') }}"></a></li>
 
 
 
