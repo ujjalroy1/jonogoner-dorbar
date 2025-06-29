@@ -43,7 +43,7 @@
           <li><a href="{{ route('notice.show') }}">সব নোটিশ দেখুন</a></li>
         </ul>
       </li>
-      <li><a href="{{ route('admin.chat.index') }}"></a></li>
+      <li><a href="{{ route('admin.chat.index') }}">Live Chat</a></li>
 
 
 
